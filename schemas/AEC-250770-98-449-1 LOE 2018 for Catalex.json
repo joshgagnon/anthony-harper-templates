@@ -2,6 +2,27 @@
     "title": "AEC-250770-98-449-1 LOE 2018 for Catalex",
     "formName": "AEC-250770-98-449-1 LOE 2018 for Catalex",
     "properties": {
-
+        "recipient": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Name"
+                }
+            }
+        },
+        "matter": {
+            "type": "object",
+            "properties": {
+                "subject": {
+                    "type": "string",
+                    "title": "Subject"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Description"
+                }
+            }
+        }
     }
 }
