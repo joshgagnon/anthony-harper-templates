@@ -190,7 +190,7 @@
                 <table:table-column table:style-name="Table1.A"/>
                 <table:table-row table:style-name="Table1.1">
                     <table:table-cell office:value-type="string" table:style-name="Table1.A1">
-                        <text:p text:style-name="P2">Date</text:p>
+                        <text:p text:style-name="P2">{{ document.date }}</text:p>
                     </table:table-cell>
                 </table:table-row>
                 <table:table-row table:style-name="Table1.1">
@@ -208,18 +208,14 @@
                         </text:p>
                         <text:p text:style-name="No_20_Spacing"/>
                         <text:p text:style-name="No_20_Spacing">
-                            <text:bookmark-start text:name="Recipient"/>Name</text:p>
-                        <text:p text:style-name="No_20_Spacing">Address</text:p>
-                        <text:p text:style-name="No_20_Spacing">Address
-                            <text:bookmark-end text:name="Recipient"/></text:p>
+                            <text:bookmark-start text:name="Recipient"/>{{ recipient.name }}</text:p>
+                            {% for addressLine in recipient.address.lines %}
+                        <text:p text:style-name="No_20_Spacing">{{ addressLine.line }}</text:p>
+                            {% endfor %}
+                            <text:bookmark-end text:name="Recipient"/>
+                            }
                         <text:p text:style-name="No_20_Spacing"/>
-                        <text:p text:style-name="P13">Attention:
-                            <text:tab/>
-                            <text:bookmark-start text:name="Attention"/>
-                            Name
-                            <text:bookmark-end text:name="Attention"/>
-                            <text:bookmark text:name="EnvelopeAddress"/></text:p>
-                        <text:p text:style-name="P14"/>
+
                     </table:table-cell>
                 </table:table-row>
                 <table:table-row table:style-name="Table1.1">
@@ -263,15 +259,15 @@
             </text:p>
             <text:p text:style-name="Standard">Dear
                 <text:bookmark-start text:name="Salutation"/>
-                Name
+                {{ recipient.name }}
                 <text:bookmark-end text:name="Salutation"/></text:p>
             <text:p text:style-name="Standard">
                 <text:bookmark-start text:name="Subject"/>
-                <text:span text:style-name="T1">SUBJECT</text:span>
+                <text:span text:style-name="T1">{{ document.subject }}</text:span>
                 <text:bookmark-end text:name="Subject"/>
             </text:p>
             <text:p text:style-name="Standard">
-                <text:bookmark text:name="Start"/>Thank you for engaging Anthony Harper to represent ***** in relation to *****.
+                <text:bookmark text:name="Start"/>Thank you for engaging Anthony Harper to represent {{ recipient.name }} in relation to {{ matter.description }}.
                 <text:s/>
                 This letter, together with the
                 <text:span text:style-name="T1">attached</text:span>
@@ -279,15 +275,11 @@
             <text:h text:outline-level="2" text:style-name="Heading_20_2">Our role</text:h>
             <text:p text:style-name="Standard">We understand that our role will comprise the following:</text:p>
             <text:list text:style-name="WWNum6" xml:id="list5445922147087639431">
+                {% for role in matter.roles %}
                 <text:list-item>
-                    <text:p text:style-name="P3">*****;</text:p>
+                    <text:p text:style-name="P3">{{ role.text }}; {% if loop.revindex0 == 1 %} and {% endif %}</text:p>
                 </text:list-item>
-                <text:list-item>
-                    <text:p text:style-name="P3">*****; and</text:p>
-                </text:list-item>
-                <text:list-item>
-                    <text:p text:style-name="P3">*****.</text:p>
-                </text:list-item>
+                {% endfor %}
             </text:list>
             <text:p text:style-name="Standard">We recognise that our role might change in the course of engagement.</text:p>
             <text:h text:outline-level="2" text:style-name="Heading_20_2">Our team</text:h>

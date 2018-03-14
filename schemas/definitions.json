@@ -1,4 +1,26 @@
 {
     "definitions": {
+        "address": {
+            "type": "array",
+            "title": "Address",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "line": {
+                        "type": "string",
+                        "title": "Address Line",
+                        "enumeratedTitle": "Address Line #{0}"
+                    }
+                },
+                "required": ["line"],
+                "x-hints": {
+                    "form": {
+                        "addItem": "Add Address Line",
+                        "controls": "inline"
+                    }
+                }
+            },
+            "default": [{"line": ""}]
+        }
     }
 }

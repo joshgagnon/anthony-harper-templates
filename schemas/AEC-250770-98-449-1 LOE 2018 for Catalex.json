@@ -2,8 +2,24 @@
     "title": "AEC-250770-98-449-1 LOE 2018 for Catalex",
     "formName": "AEC-250770-98-449-1 LOE 2018 for Catalex",
     "properties": {
-        "recipient": {
+        "document": {
             "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "title": "Date",
+                    "format": "date",
+                    "formatDate": "D MMMM YYYY"
+                },
+                "subject": {
+                    "type": "string",
+                    "title": "Subject"
+                }
+            }
+        },
+        "sender": {
+            "type": "object",
+            "title": "Sender",
             "properties": {
                 "name": {
                     "type": "string",
@@ -11,16 +27,49 @@
                 }
             }
         },
+        "recipient": {
+            "type": "object",
+            "title": "Recipient",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Name"
+                },
+                "address": { "$ref": "#/definitions/address" }
+            }
+        },
         "matter": {
             "type": "object",
+            "title": "Matter",
             "properties": {
-                "subject": {
-                    "type": "string",
-                    "title": "Subject"
-                },
                 "description": {
                     "type": "string",
                     "title": "Description"
+                },
+                "roles": {
+                    "type": "array",
+                    "title": "Roles",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string",
+                                "title": "Role",
+                                "x-hints": {
+                                    "form": {
+                                        "inputComponent": "textarea"
+                                    }
+                                }
+                            }
+                        },
+                        "x-hints": {
+                            "form": {
+                                "addItem": "Add Role"
+                            }
+                        }
+                    },
+                    "default": [{}],
+                    "minItems": 1
                 }
             }
         }
