@@ -32,10 +32,12 @@
                         "type": "string"
                     }
                 },
+                "required": ["name"],
                 "x-hints": {
-                    "form": {"addItem": "Add Name", "controls": "inline" }
+                    "form": {"addItem": "Add Name", "controls": "inline"}
                 }
-            }
+            },
+            "default": [{"name": ""}]
         }
     }
 }

@@ -148,11 +148,11 @@
                                     "$ref": "#/definitions/nameList"
                                 }
                             },
-                            "required": ["assistedByNames"],
-                            "x-hints": {
-                                "form": { "selector": "assistedBy"}
-                            }
-                        }]
+                            "required": ["assistedByNames"]
+                        }],
+                        "x-hints": {
+                            "form": { "selector": "assistedBy"}
+                        }
                 },
                 "workCarriedOut": {
                     "type": "object",
@@ -175,17 +175,20 @@
                                     "$ref": "#/definitions/nameList"
                                 }
                             },
-                            "required": ["workCarriedOutBy"],
-                            "x-hints": {
-                                "form": { "selector": "workCarriedOutBy"}
-                            }
-                        }]
+                            "required": ["workCarriedOutBy"]
+                        }],
+                        "x-hints": {
+                            "form": { "selector": "workCarriedOutBy"}
+                        }
                 },
                 "includeLegalStaff": {
                     "title": "Legal Staff Involved",
                     "enum": [false, true]
                 }
             }
+        },
+        "fees": {
+
         }
     }
 }

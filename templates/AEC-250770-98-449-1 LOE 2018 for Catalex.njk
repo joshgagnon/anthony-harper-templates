@@ -288,13 +288,13 @@
             </text:list>
             <text:p text:style-name="Standard">We recognise that our role might change in the course of engagement.</text:p>
             <text:h text:outline-level="2" text:style-name="Heading_20_2">Our team</text:h>
-            <text:p text:style-name="Standard">I will have overall responsibility for the delivery of legal services by Anthony Harper on this matter[, and will be directly involved throughout].[
-                <text:s/>
-                I will be assisted by ***** and *****.][
-                <text:s/>
-                The work will principally be carried out by ***** [and *****].]
-                <text:s/>
-                Other lawyers [and legal staff] may become involved as the matter progresses, both to ensure efficient and timely delivery of services, and to provide additional specialist assistance if required.</text:p>
+            <text:p text:style-name="Standard">I will have overall responsibility for the delivery of legal services by Anthony Harper on this matter{% if team.selfInvolved %}, and will be directly involved throughout{% endif %}.
+
+                {% if team.assisted.assistedBy %} I will be assisted by {{ team.assisted.assistedByNames  | join_and('name') }}.
+                <text:s/>{% endif %}
+                {% if team.workCarriedOut.workCarriedOutBy %} The work will principally be carried out {{ team.workCarriedOut.workCarriedOutByNames | join_and('name') }}.
+                <text:s/>{% endif %}
+                Other lawyers {% if team.includeLegalStaff %}and legal staff {% endif %}may become involved as the matter progresses, both to ensure efficient and timely delivery of services, and to provide additional specialist assistance if required.</text:p>
             <text:h text:outline-level="2" text:style-name="Heading_20_2">Professional fees</text:h>
             <text:p text:style-name="Standard">Our current hourly rates (plus GST if any) for this type of work are as follows:</text:p>
             <table:table table:name="Table2" table:style-name="Table2">
