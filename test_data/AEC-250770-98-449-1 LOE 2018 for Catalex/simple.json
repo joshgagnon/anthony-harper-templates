@@ -1,7 +1,7 @@
 {
      "document": {},
  "sender": {},
-"matter": {},
+    "matter": {"roles": [{"text": "taco"}]},
         "recipient": {
             "name": "John",
             "address": [

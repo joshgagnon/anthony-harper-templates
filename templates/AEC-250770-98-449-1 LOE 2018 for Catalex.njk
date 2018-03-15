@@ -209,7 +209,7 @@
                         <text:p text:style-name="No_20_Spacing"/>
                         <text:p text:style-name="No_20_Spacing">
                             <text:bookmark-start text:name="Recipient"/>{{ recipient.name }}</text:p>
-                            {% for addressLine in recipient.address.lines %}
+                            {% for addressLine in recipient.address %}
                         <text:p text:style-name="No_20_Spacing">{{ addressLine.line }}</text:p>
                             {% endfor %}
                             <text:bookmark-end text:name="Recipient"/>
@@ -222,29 +222,34 @@
                     <table:table-cell office:value-type="string" table:style-name="Table1.A1">
                         <text:p text:style-name="No_20_Spacing"/>
                         <text:p text:style-name="No_20_Spacing">
+
+                            {% if document.delivery.deliveryMethod === 'BY COURIER' %}
                             <text:bookmark-start text:name="DeliveryCourier"/>
                             <text:span text:style-name="T1">BY COURIER</text:span>
                             <text:bookmark-end text:name="DeliveryCourier"/>
-                        </text:p>
-                        <text:p text:style-name="No_20_Spacing">
+                            {% endif %}
+
+                            {% if document.delivery.deliveryMethod === 'BY HAND' %}
                             <text:bookmark-start text:name="DeliveryHand"/>
                             <text:span text:style-name="T1">BY HAND</text:span>
                             <text:bookmark-end text:name="DeliveryHand"/>
-                        </text:p>
-                        <text:p text:style-name="No_20_Spacing">
+                            {% endif %}
+                            {% if document.delivery.deliveryMethod === 'BY EMAIL' %}
                             <text:span text:style-name="T1">BY EMAIL:
                                 <text:s/></text:span>
                             <text:bookmark-start text:name="DeliveryEmail"/>
-                            <text:span text:style-name="T1">email</text:span>
+                            <text:span text:style-name="T1">{{ document.delivery.emailAddress }}</text:span>
                             <text:bookmark-end text:name="DeliveryEmail"/>
-                        </text:p>
-                        <text:p text:style-name="No_20_Spacing">
+                            {% endif %}
+                            {% if document.delivery.deliveryMethod === 'FOX NO' %}
                             <text:span text:style-name="T1">FAX NO:
                                 <text:tab/></text:span>
                             <text:bookmark-start text:name="DeliveryFax"/>
-                            <text:span text:style-name="T1">000</text:span>
+                            <text:span text:style-name="T1">{{ document.delivery.faxNumber }}</text:span>
                             <text:bookmark-end text:name="DeliveryFax"/>
+                            {% endif %}
                         </text:p>
+
                         <text:p text:style-name="No_20_Spacing"/>
                         <text:p text:style-name="No_20_Spacing">
                             <text:bookmark-start text:name="DeliveryWP"/>

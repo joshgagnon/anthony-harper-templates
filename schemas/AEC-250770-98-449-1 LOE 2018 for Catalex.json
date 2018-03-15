@@ -8,12 +8,57 @@
                 "date": {
                     "type": "string",
                     "title": "Date",
-                    "format": "date",
-                    "formatDate": "D MMMM YYYY"
+                    "formatDate": "D MMMM YYYY",
+                    "x-hints" : {
+                        "form": { "inputComponent": "date" }
+                    }
                 },
                 "subject": {
                     "type": "string",
                     "title": "Subject"
+                },
+                "delivery": {
+                    "type": "object",
+                    "properties": {
+                        "deliveryMethod": {
+                            "title": "Delivery Method",
+                            "enum": ["BY COURIER", "BY HAND", "BY EMAIL", "FAX NO"]
+                        }
+                    },
+                    "oneOf":
+                        [{
+                            "properties": {
+                                "deliveryMethod": { "enum": ["BY COURIER"] }
+                            }
+                        }, {
+                            "properties": {
+                                "deliveryMethod": { "enum": ["BY HAND"] }
+                            }
+                        }, {
+                            "properties": {
+                                "deliveryMethod": { "enum": ["BY EMAIL"] },
+                                "emailAddress": {
+                                    "title": "Email Address",
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["emailAddress"]
+                        },{
+                            "properties": {
+                                "deliveryMethod": { "enum": ["FAX NO"] },
+                                "faxNumber": {
+                                    "title": "Fax Number",
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["faxNumber"]
+                        }
+                    ],
+                    "default": {"deliveryMethod": "BY COURIER"},
+                    "required": ["deliveryMethod"],
+                    "x-hints": {
+                        "form": { "selector": "deliveryMethod" }
+                    }
                 }
             }
         },
@@ -70,6 +115,75 @@
                     },
                     "default": [{}],
                     "minItems": 1
+                }
+            }
+        },
+        "team": {
+            "type": "object",
+            "title": "The Team",
+            "properties": {
+
+                "selfInvolved": {
+                    "title": "I will personally be involved",
+                    "enum": [false, true]
+                },
+                "assisted": {
+                    "type": "object",
+                    "properties": {
+                        "assistedBy": {
+                            "title": "I will be assisted",
+                            "enum": [false, true]
+                        }
+                    },
+                    "oneOf":
+                        [{
+                            "properties": {
+                                "assistedBy": { "enum": [false] }
+                            }
+                        }, {
+                            "properties": {
+                                "assistedBy": { "enum": [true] },
+                                "assistedByNames": {
+                                    "title": "Assisted By Names",
+                                    "$ref": "#/definitions/nameList"
+                                }
+                            },
+                            "required": ["assistedByNames"],
+                            "x-hints": {
+                                "form": { "selector": "assistedBy"}
+                            }
+                        }]
+                },
+                "workCarriedOut": {
+                    "type": "object",
+                    "properties": {
+                        "workCarriedOutBy": {
+                            "title": "Work Principly Carried Out By",
+                            "enum": [false, true]
+                        }
+                    },
+                    "oneOf":
+                        [{
+                            "properties": {
+                                "workCarriedOutBy": { "enum": [false] }
+                            }
+                        }, {
+                            "properties": {
+                                "workCarriedOutBy": { "enum": [true] },
+                                "workCarriedOutByNames": {
+                                    "title": "Work Carried Out By Names",
+                                    "$ref": "#/definitions/nameList"
+                                }
+                            },
+                            "required": ["workCarriedOutBy"],
+                            "x-hints": {
+                                "form": { "selector": "workCarriedOutBy"}
+                            }
+                        }]
+                },
+                "includeLegalStaff": {
+                    "title": "Legal Staff Involved",
+                    "enum": [false, true]
                 }
             }
         }

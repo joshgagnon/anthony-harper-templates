@@ -21,6 +21,21 @@
                 }
             },
             "default": [{"line": ""}]
+        },
+        "nameList": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "enumeratedTitle": "Name #{0}",
+                        "type": "string"
+                    }
+                },
+                "x-hints": {
+                    "form": {"addItem": "Add Name", "controls": "inline" }
+                }
+            }
         }
     }
 }
