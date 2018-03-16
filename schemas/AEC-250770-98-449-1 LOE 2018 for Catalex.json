@@ -84,7 +84,7 @@
                 },
                 "title": {
                     "type": "string",
-                    "title": "title"
+                    "title": "Title"
                 }
             },
             "required": ["name", "title"]
