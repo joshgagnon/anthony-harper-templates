@@ -6,12 +6,7 @@
             "type": "object",
             "properties": {
                 "date": {
-                    "type": "string",
-                    "title": "Date",
-                    "formatDate": "D MMMM YYYY",
-                    "x-hints" : {
-                        "form": { "inputComponent": "date" }
-                    }
+                     "$ref": "#/definitions/date"
                 },
                 "subject": {
                     "type": "string",
@@ -59,8 +54,25 @@
                     "x-hints": {
                         "form": { "selector": "deliveryMethod" }
                     }
+                },
+                "contact": {
+                    "type": "string",
+                    "title": "Contact"
+                },
+                "partnerResponsible": {
+                    "type": "string",
+                    "title": "Partner Responsible"
+                },
+                "ourReference": {
+                    "type": "string",
+                    "title": "Our Reference"
+                },
+                "theirReference": {
+                    "type": "string",
+                    "title": "Their Reference"
                 }
-            }
+            },
+            "required": ["date", "subject", "delivery", "contact", "partnerResponsible", "ourReference"]
         },
         "sender": {
             "type": "object",
@@ -69,8 +81,13 @@
                 "name": {
                     "type": "string",
                     "title": "Name"
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title"
                 }
-            }
+            },
+            "required": ["name", "title"]
         },
         "recipient": {
             "type": "object",
@@ -81,7 +98,8 @@
                     "title": "Name"
                 },
                 "address": { "$ref": "#/definitions/address" }
-            }
+            },
+            "required": ["name", "address"]
         },
         "matter": {
             "type": "object",
@@ -116,7 +134,8 @@
                     "default": [{}],
                     "minItems": 1
                 }
-            }
+            },
+            "required": ["description", "roles"]
         },
         "team": {
             "type": "object",
@@ -177,9 +196,9 @@
                             },
                             "required": ["workCarriedOutBy"]
                         }],
-                        "x-hints": {
-                            "form": { "selector": "workCarriedOutBy"}
-                        }
+                    "x-hints": {
+                        "form": { "selector": "workCarriedOutBy"}
+                    }
                 },
                 "includeLegalStaff": {
                     "title": "Legal Staff Involved",
@@ -188,7 +207,310 @@
             }
         },
         "fees": {
+            "type": "object",
+            "title": "Fees",
+            "properties": {
 
+                "breakdown": {
+                    "type": "object",
+                    "properties": {
+
+                        "headlineRate": {
+                            "type": "object",
+                            "properties": {
+                                "included": {
+                                    "title": "Headline Rate",
+                                    "enum": [false, true]
+                                }
+                            },
+                            "oneOf":
+                                [{
+                                    "properties": {
+                                        "included": { "enum": [false] }
+                                    }
+                                }, {
+                                    "properties": {
+                                        "included": { "enum": [true] },
+                                        "including": {
+                                            "title": "Including",
+                                            "$ref": "#/definitions/nameList"
+                                        }
+                                    },
+                                    "required": []
+                                }],
+                            "x-hints": {
+                                "form": { "selector": "included"}
+                            }
+                        },
+
+                        "discountRate": {
+                            "type": "object",
+                            "properties": {
+                                "included": {
+                                    "title": "Discount Rate",
+                                    "enum": [false, true]
+                                }
+                            },
+                            "oneOf":
+                                [{
+                                    "properties": {
+                                        "included": { "enum": [false] }
+                                    }
+                                }, {
+                                    "properties": {
+                                        "included": { "enum": [true] },
+                                        "including": {
+                                            "title": "Including",
+                                            "$ref": "#/definitions/nameList"
+                                        }
+                                    },
+                                    "required": []
+                                }],
+                            "x-hints": {
+                                "form": { "selector": "included"}
+                            }
+                        },
+
+                        "specialCouncil": {
+                            "type": "object",
+                            "properties": {
+                                "included": {
+                                    "title": "Special Council",
+                                    "enum": [false, true]
+                                }
+                            },
+                            "oneOf":
+                                [{
+                                    "properties": {
+                                        "included": { "enum": [false] }
+                                    }
+                                }, {
+                                    "properties": {
+                                        "included": { "enum": [true] },
+                                        "including": {
+                                            "title": "Including",
+                                            "$ref": "#/definitions/nameList"
+                                        }
+                                    },
+                                    "required": []
+                                }],
+                            "x-hints": {
+                                "form": { "selector": "included"}
+                            }
+                        },
+
+                        "seniorAssociates": {
+                            "type": "object",
+                            "properties": {
+                                "included": {
+                                    "title": "Senior Associates and Associates",
+                                    "enum": [false, true]
+                                }
+                            },
+                            "oneOf":
+                                [{
+                                    "properties": {
+                                        "included": { "enum": [false] }
+                                    }
+                                }, {
+                                    "properties": {
+                                        "included": { "enum": [true] },
+                                        "including": {
+                                            "title": "Including",
+                                            "$ref": "#/definitions/nameList"
+                                        }
+                                    },
+                                    "required": []
+                                }],
+                            "x-hints": {
+                                "form": { "selector": "included"}
+                            }
+                        },
+
+                        "solicitors": {
+                            "type": "object",
+                            "properties": {
+                                "included": {
+                                    "title": "Solicitors",
+                                    "enum": [false, true]
+                                }
+                            },
+                            "oneOf":
+                                [{
+                                    "properties": {
+                                        "included": { "enum": [false] }
+                                    }
+                                }, {
+                                    "properties": {
+                                        "included": { "enum": [true] },
+                                        "including": {
+                                            "title": "Including",
+                                            "$ref": "#/definitions/nameList"
+                                        }
+                                    },
+                                    "required": []
+                                }],
+                            "x-hints": {
+                                "form": { "selector": "included"}
+                            }
+                        },
+
+                        "legalExecutives": {
+                            "type": "object",
+                            "properties": {
+                                "included": {
+                                    "title": "Legal Executives",
+                                    "enum": [false, true]
+                                }
+                            },
+                            "oneOf":
+                                [{
+                                    "properties": {
+                                        "included": { "enum": [false] }
+                                    }
+                                }, {
+                                    "properties": {
+                                        "included": { "enum": [true] },
+                                        "including": {
+                                            "title": "Including",
+                                            "$ref": "#/definitions/nameList"
+                                        }
+                                    },
+                                    "required": []
+                                }],
+                            "x-hints": {
+                                "form": { "selector": "included"}
+                            }
+                        }
+
+                    }
+
+                },
+
+
+                "estimate": {
+                    "type": "object",
+                    "properties": {
+                        "includeEstimate": {
+                            "title": "Include Estimate",
+                            "enum": [false, true]
+                        }
+                    },
+                    "oneOf":
+                        [{
+                            "properties": {
+                                "includeEstimate": { "enum": [false] }
+                            }
+                        }, {
+                            "properties": {
+                                "includeEstimate": { "enum": [true] },
+                                "lowEnd": {
+                                    "title": "Estimate Low End",
+                                    "type": "string"
+                                },
+                                "highEnd": {
+                                    "title": "Estimate High End",
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["lowEnd", "highEnd"]
+                        }],
+                    "x-hints": {
+                        "form": { "selector": "includeEstimate"}
+                    }
+                },
+                "advance": {
+                    "type": "object",
+                    "properties": {
+                        "requireAdvance": {
+                            "title": "Require Advance",
+                            "enum": [false, true]
+                        }
+                    },
+                    "oneOf":
+                        [{
+                            "properties": {
+                                "requireAdvance": { "enum": [false] }
+                            }
+                        }, {
+                            "properties": {
+                                "requireAdvance": { "enum": [true] },
+                                "dueDate": {
+                                    "title": "Due Date",
+                                    "$ref": "#/definitions/date"
+                                },
+                                "amount": {
+                                    "title": "Amount",
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["amount", "dueDate"]
+                        }],
+                    "x-hints": {
+                        "form": { "selector": "requireAdvance"}
+                    }
+                }
+            }
+        },
+         "schedule": {
+            "type": "object",
+            "title": "Schedule",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string",
+                                "title": "Schedule",
+                                "enumeratedTitle": "Schedule #{0}",
+                                "x-hints": {
+                                    "form": {
+                                        "inputComponent": "textarea"
+                                    }
+                                }
+                            }
+                        },
+                        "x-hints": {
+                            "form": {
+                                "addItem": "Add Schedule Item"
+                            }
+                        }
+                    },
+                    "default": [{}],
+                    "minItems": 1
+                }
+            },
+            "required": []
         }
+    },
+    "wizard":{
+        "steps": [
+            {
+                "title": "Document & Sender",
+                "items": ["document", "sender"]
+            },
+            {
+                "title": "Recipient",
+                "items": ["recipient"]
+            },
+            {
+                "title": "Matter",
+                "items": ["matter"]
+            },
+            {
+                "title": "Team",
+                "items": ["team"]
+            },
+            {
+                "title": "Fees",
+                "items": ["fees"]
+            },
+            {
+                "title": "Schedule",
+                "items": ["schedule"]
+            }]
     }
+
 }

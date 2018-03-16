@@ -22,6 +22,14 @@
             },
             "default": [{"line": ""}]
         },
+        "date": {
+            "type": "string",
+            "title": "Date",
+            "formatDate": "D MMMM YYYY",
+            "x-hints" : {
+                "form": { "inputComponent": "date" }
+            }
+        },
         "nameList": {
             "type": "array",
             "items": {
