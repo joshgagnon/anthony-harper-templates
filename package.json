@@ -1,10 +1,9 @@
 {
   "name": "anthony-harper-templates",
-  "version": "1.0.0",
-  "description": "Templates and their corresponding JSON Schema's for Evolution Lawyers",
+  "version": "1.0.1",
+  "description": "Templates",
   "repository": {
     "type": "git",
-    "url": "https://github.com/joshgagnon/el-templates.git"
-  },
-  "private": true
+    "url": "https://github.com/joshgagnon/anthony-harper-templates.git"
+  }
 }
