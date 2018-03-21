@@ -165,10 +165,10 @@
                     </table:table-cell>
                 </table:table-row>
                 {% endif %}
-                {% if fees.breakdown.specialCouncil.included %}
+                {% if fees.breakdown.specialCounsel.included %}
                 <table:table-row table:style-name="Table2.1">
                     <table:table-cell office:value-type="string" table:style-name="Table2.A1">
-                        <text:p text:style-name="Standard">Special Counsel (including {{ fees.breakdown.specialCouncil.including | join_and('name') }})</text:p>
+                        <text:p text:style-name="Standard">Special Counsel (including {{ fees.breakdown.specialCounsel.including | join_and('name') }})</text:p>
                     </table:table-cell>
                     <table:table-cell office:value-type="string" table:style-name="Table2.A1">
                         <text:p text:style-name="P1">$440</text:p>
@@ -207,8 +207,8 @@
                 </table:table-row>
                 {% endif %}
             </table:table>
-            {% if fees.estimate.includeEstimate %}
-            <text:p text:style-name="Standard">We estimate our fees in relation to the work to be between ${{ fees.estimate.lowEnd }} and ${{ fees.estimate.highEnd }} (plus GST and disbursements).
+            {% if estimate.includeEstimate %}
+            <text:p text:style-name="Standard">We estimate our fees in relation to the work to be between ${{ estimate.lowEnd }} and ${{ estimate.highEnd }} (plus GST and disbursements).
                 <text:s/>
                 This estimate is given on the bases and assumptions set out in the Schedule to this letter.</text:p>
             {% else %}
@@ -217,10 +217,10 @@
                 We are however happy to provide estimates, and update those estimates, as our engagement progresses.</text:p>
             {% endif %}
             <text:p text:style-name="Standard">Please note that our practice is to render monthly invoices prior to the end of each month.</text:p>
-            {% if fees.estimate.advance.requireAdvance %}
+            {% if estimate.advance.requireAdvance %}
             <text:p text:style-name="Standard">We ask clients, from time to time, for funds in advance to be held in trust and applied by us towards payment of our fees and/or disbursements.
                 <text:s/>
-                I should therefore be grateful if you would let us have, by no later than {{fees.estimate.advance.dueDate }}, initial funds on advance of ${{ fees.estimate.advance.amount}}.
+                I should therefore be grateful if you would let us have, by no later than {{estimate.advance.dueDate }}, initial funds on advance of ${{estimate.advance.amount}}.
                 <text:s/>
                 We will start to work on this matter as soon as we have received those funds.</text:p>
             {% endif %}
@@ -281,15 +281,16 @@
                 <text:bookmark-start text:name="YourRef"/>
                 {{ document.theirReference }}
                 <text:bookmark-end text:name="YourRef"/></text:p>
-            <text:p text:style-name="P4">
-                <text:span text:style-name="T1">SCHEDULE</text:span>
-            </text:p>
-            <text:h text:outline-level="2" text:style-name="P6">Bases and assumptions</text:h>
-            {% for s in schedule.items %}
-                <text:p text:style-name="Standard">{{ s.text }}</text:p>
-            {% endfor%}
-            <text:p text:style-name="Standard"/>
-
+            {% if estimate.schedule.items.length %}
+                <text:p text:style-name="P4">
+                    <text:span text:style-name="T1">SCHEDULE</text:span>
+                </text:p>
+                <text:h text:outline-level="2" text:style-name="P6">Bases and assumptions</text:h>
+                {% for s in estimate.schedule.items %}
+                    <text:p text:style-name="Standard">{{ s.text }}</text:p>
+                {% endfor%}
+                <text:p text:style-name="Standard"/>
+            {% endif %}
             <text:p text:style-name="Standard"/>
             <text:h text:outline-level="1" text:style-name="P5">
                 <text:span text:style-name="T4">Standard terms</text:span>

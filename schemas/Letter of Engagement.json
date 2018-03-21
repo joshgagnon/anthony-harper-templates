@@ -57,7 +57,7 @@
                 },
                 "contact": {
                     "type": "string",
-                    "title": "Contact"
+                    "title": "Our Contact"
                 },
                 "partnerResponsible": {
                     "type": "string",
@@ -95,7 +95,7 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "title": "Name"
+                    "title": "Client Name"
                 },
                 "address": { "$ref": "#/definitions/address" }
             },
@@ -111,13 +111,13 @@
                 },
                 "roles": {
                     "type": "array",
-                    "title": "Roles",
+                    "title": "Our Roles",
                     "items": {
                         "type": "object",
                         "properties": {
                             "text": {
                                 "type": "string",
-                                "title": "Role",
+                                "title": "Our Role",
                                 "x-hints": {
                                     "form": {
                                         "inputComponent": "textarea"
@@ -219,7 +219,7 @@
                             "type": "object",
                             "properties": {
                                 "included": {
-                                    "title": "Headline Rate",
+                                    "title": "Partner Headline Rate",
                                     "enum": [false, true]
                                 }
                             },
@@ -247,7 +247,7 @@
                             "type": "object",
                             "properties": {
                                 "included": {
-                                    "title": "Discount Rate",
+                                    "title": "Partner Discount Rate",
                                     "enum": [false, true]
                                 }
                             },
@@ -271,11 +271,11 @@
                             }
                         },
 
-                        "specialCouncil": {
+                        "specialCounsel": {
                             "type": "object",
                             "properties": {
                                 "included": {
-                                    "title": "Special Council",
+                                    "title": "Special Counsel",
                                     "enum": [false, true]
                                 }
                             },
@@ -385,106 +385,114 @@
 
                     }
 
-                },
-
-
-                "estimate": {
-                    "type": "object",
-                    "properties": {
-                        "includeEstimate": {
-                            "title": "Include Estimate",
-                            "enum": [false, true]
-                        }
-                    },
-                    "oneOf":
-                        [{
-                            "properties": {
-                                "includeEstimate": { "enum": [false] }
-                            }
-                        }, {
-                            "properties": {
-                                "includeEstimate": { "enum": [true] },
-                                "lowEnd": {
-                                    "title": "Estimate Low End",
-                                    "type": "string"
-                                },
-                                "highEnd": {
-                                    "title": "Estimate High End",
-                                    "type": "string"
-                                }
-                            },
-                            "required": ["lowEnd", "highEnd"]
-                        }],
-                    "x-hints": {
-                        "form": { "selector": "includeEstimate"}
-                    }
-                },
-                "advance": {
-                    "type": "object",
-                    "properties": {
-                        "requireAdvance": {
-                            "title": "Require Advance",
-                            "enum": [false, true]
-                        }
-                    },
-                    "oneOf":
-                        [{
-                            "properties": {
-                                "requireAdvance": { "enum": [false] }
-                            }
-                        }, {
-                            "properties": {
-                                "requireAdvance": { "enum": [true] },
-                                "dueDate": {
-                                    "title": "Due Date",
-                                    "$ref": "#/definitions/date"
-                                },
-                                "amount": {
-                                    "title": "Amount",
-                                    "type": "string"
-                                }
-                            },
-                            "required": ["amount", "dueDate"]
-                        }],
-                    "x-hints": {
-                        "form": { "selector": "requireAdvance"}
-                    }
                 }
             }
         },
-         "schedule": {
+        "estimate": {
             "type": "object",
-            "title": "Schedule",
             "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "text": {
-                                "type": "string",
-                                "title": "Schedule",
-                                "enumeratedTitle": "Schedule #{0}",
-                                "x-hints": {
-                                    "form": {
-                                        "inputComponent": "textarea"
-                                    }
-                                }
-                            }
-                        },
-                        "x-hints": {
-                            "form": {
-                                "addItem": "Add Schedule Item"
-                            }
-                        }
-                    },
-                    "default": [{}],
-                    "minItems": 1
+                "includeEstimate": {
+                    "title": "Include Estimate",
+                    "enum": [false, true]
                 }
             },
-            "required": []
+            "oneOf":
+                [{
+                    "properties": {
+                        "includeEstimate": { "enum": [false] }
+                    }
+                }, {
+                    "properties": {
+                        "includeEstimate": { "enum": [true] },
+                        "lowEnd": {
+                            "title": "Estimate Low End",
+                            "type": "string"
+                        },
+                        "highEnd": {
+                            "title": "Estimate High End",
+                            "type": "string"
+                        },
+                         "schedule": {
+                            "type": "object",
+                            "title": "Schedule",
+                            "properties": {
+                                "items": {
+                                    "type": "array",
+                                    "validationTitle": "Schedule",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "text": {
+                                                "type": "string",
+                                                "title": "Schedule",
+                                                "enumeratedTitle": "Schedule #{0}",
+                                                "x-hints": {
+                                                    "form": {
+                                                        "inputComponent": "textarea"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "required": ["text"],
+                                        "x-hints": {
+                                            "form": {
+                                                "addItem": "Add Schedule Item",
+                                                "suggestions": [
+                                                    {"title": "Our work is confined to the matters set out in the letter.", "value": {"text": "Our work is confined to the matters set out in the letter."}},
+                                                    {"title": "There will be no significant legal issues or discrepancies arising out of our due diligence, the documentation for the transaction or the transaction structure.", "value": {"text": "There will be no significant legal issues or discrepancies arising out of our due diligence, the documentation for the transaction or the transaction structure."}},
+                                                    {"title": "The documentation for the transaction will not be overly voluminous or complex.", "value": {"text": "The documentation for the transaction will not be overly voluminous or complex."}},
+                                                    {"title": "Negotiation of documentation will be minimal.", "value": {"text": "Negotiation of documentation will be minimal."}},
+                                                    {"title": "The matter proceeds to an orderly settlement.", "value": {"text": "The matter proceeds to an orderly settlement."}},
+                                                    {"title": "Settlement of the transaction takes place on or before *****.", "value": {"text": "Settlement of the transaction takes place on or before *****."}}
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "minItems": 1
+                                }
+                            },
+                            "required": []
+                        }
+                    },
+                    "required": ["lowEnd", "highEnd"]
+                }],
+            "x-hints": {
+                "form": { "selector": "includeEstimate"}
+            }
+        },
+        "advance": {
+            "type": "object",
+            "properties": {
+                "requireAdvance": {
+                    "title": "Require Advance",
+                    "enum": [false, true]
+                }
+            },
+            "oneOf":
+                [{
+                    "properties": {
+                        "requireAdvance": { "enum": [false] }
+                    }
+                }, {
+                    "properties": {
+                        "requireAdvance": { "enum": [true] },
+                        "dueDate": {
+                            "title": "Due Date",
+                            "$ref": "#/definitions/date"
+                        },
+                        "amount": {
+                            "title": "Amount",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["amount", "dueDate"]
+                }],
+            "x-hints": {
+                "form": { "selector": "requireAdvance"}
+            }
         }
     },
+    "required": ["document", "sender", "recipient", "matter", "team", "fees", "estimate", "advance"],
     "wizard":{
         "steps": [
             {
@@ -508,8 +516,8 @@
                 "items": ["fees"]
             },
             {
-                "title": "Schedule",
-                "items": ["schedule"]
+                "title": "Estimate & Advance",
+                "items": ["estimate", "advance"]
             }]
     }
 
